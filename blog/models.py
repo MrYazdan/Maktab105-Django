@@ -1,6 +1,9 @@
 from uuid import uuid4
 from django.db import models
 from django.utils import timezone
+from tinymce.models import HTMLField
+
+
 
 # def id_creator():
 #     return uuid4().clock_seq
@@ -12,8 +15,11 @@ from django.utils import timezone
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=105)
-    content = models.TextField()
+    title = models.CharField(max_length=105, verbose_name="title of post",
+                             help_text="this is title of posts, take attention for choose correct title ^_-")
+    content = HTMLField()
+
+    is_active = models.BooleanField(default=True, editable=False)
 
     # datetime as timezone
     # published_time = models.DateTimeField(default=timezone.now)

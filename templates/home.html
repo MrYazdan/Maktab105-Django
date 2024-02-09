@@ -1,0 +1,13 @@
+{% extends "_base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <p class="w-8/12 px-[3.5rem] text-xl text-black/20% hover:font-bold duration-700 transition-[font-weight]">
+        {% if text %}
+            {{ text }}
+        {% else %}
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias animi debitis distinctio doloribus enim
+            iusto maiores quam! A doloremque eos explicabo ipsum modi molestiae omnis quisquam tempora? Cupiditate,
+            debitis, harum!
+        {% endif %}
+    </p>
+{% endblock %}

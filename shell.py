@@ -44,8 +44,8 @@ pedram = User.objects.get(username='pedram')
 # if User.objects.filter(username="yazdan").exists():
 #     my_user = User.objects.filter(username="yazdan")[0]
 
-# my_user = (queryset := User.objects.filter(username="yazdan")).exists() and queryset[0]
-# print(my_user)
+# my_user = (queryset := User.objects.filter(username="yazdan")) and queryset[0]
+# print("User:", my_user)
 
 # assert my_user, "My User Does Not Exists!"
 
@@ -63,7 +63,7 @@ pedram = User.objects.get(username='pedram')
 
 # 3:
 # set related_name = "posts"
-# print(yazdan.posts.all())
+print(yazdan.posts.all())
 
-print(getattr(yazdan, 'posts').all())
-print(hasattr(yazdan, 'posts'))
+# print(getattr(yazdan, 'posts').all())
+# print(hasattr(yazdan, 'posts'))

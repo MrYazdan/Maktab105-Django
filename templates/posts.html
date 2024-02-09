@@ -1,0 +1,9 @@
+{% extends "_base.html" %}
+{% block title %}Posts{% endblock %}
+{% block content %}
+    <div class="w-8/12 mt-5 px-[3.5rem] grid grid-cols-4 gap-6 text-xl text-black/20% hover:font-bold duration-700 transition-[font-weight] list-decimal">
+        {% for post in posts %}
+            {% include "component/post.html" with title=post.title author=post.author.username %}
+        {% endfor %}
+    </div>
+{% endblock %}
