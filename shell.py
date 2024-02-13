@@ -4,7 +4,7 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
-from blog.models import Post, User  # noqa
+# from blog.models import Post, User  # noqa
 
 # yazdan = User.objects.create(username="yazdan")
 # Post.objects.create(title="Python good", author=yazdan)
@@ -21,8 +21,8 @@ from blog.models import Post, User  # noqa
 # Post.objects.create(title="Bash bad", author=pedram)
 # Post.objects.create(title="C++ bad", author=pedram)
 
-yazdan = User.objects.get(username='yazdan')
-pedram = User.objects.get(username='pedram')
+# yazdan = User.objects.get(username='yazdan')
+# pedram = User.objects.get(username='pedram')
 
 # print(type(User.objects.get(username="yazdan")))
 # print(isinstance(User.objects.get(username="yazdan"), User))
@@ -63,7 +63,29 @@ pedram = User.objects.get(username='pedram')
 
 # 3:
 # set related_name = "posts"
-print(yazdan.posts.all())
+# print(yazdan.posts.all())
 
 # print(getattr(yazdan, 'posts').all())
 # print(hasattr(yazdan, 'posts'))
+
+# ------------- S4 --------------
+
+from product.models import Comment
+
+# Comment.objects.create(author="fardin", comment="python is good")
+# Comment.objects.create(author="zahra", comment="java !!!")
+# Comment.objects.create(author="alireza", comment="Good")
+# Comment.objects.create(author="yazdan", comment="Ilove BashScript :)")
+
+# print("All: ", Comment.objects.filter())
+# print("Actives: ", Comment.actives.filter())
+# print("All: ", Comment.objects.all())
+# print("Actives: ", Comment.actives.all())
+
+# print(Comment.objects.filter(id__lt=5))
+# print(Comment.actives.filter(id__lt=5))
+
+# print(Comment.objects.all())
+# print(Comment.objects.inactivates())
+# print(Comment.objects.exclude())
+# print(Comment.objects.get(id=2))
