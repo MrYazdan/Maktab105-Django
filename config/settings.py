@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     'blog',
     'tinymce',
     "core",
-    "product"
+    "product",
+    "shop"
 
 ]
 

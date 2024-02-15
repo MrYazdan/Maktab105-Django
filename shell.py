@@ -1,4 +1,6 @@
 import os
+from random import randint
+
 import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
@@ -134,3 +136,26 @@ from product.models import Image, Slide, Slider
 #     mixer.cycle(randint(1, 20)).blend(Slide, slider=slider)
 
 # Slider.objects.get(id=10).delete()
+
+# ------------- S6 --------------
+
+from shop.models import Product
+
+# mixer.cycle(40).blend(Product)
+
+# print(*Product.objects.all(), sep="\n")
+
+# for p in Product.objects.all():
+#     p.is_deleted = bool(randint(0, 1))
+#     p.save()
+
+# print(*Product.objects.all(), sep="\n")
+# print(*Product.objects.archive(), sep="\n")
+
+# print(Product.objects.get(id=20))
+# print(Product.objects.filter(id__gte=15))
+# Product.objects.filter(id__gt=17).delete()
+
+# print(Product.objects.archive().update(is_deleted=False))
+
+Product.objects.filter(id__gt=35).delete()
