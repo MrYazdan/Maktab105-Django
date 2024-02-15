@@ -4,6 +4,8 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
+from mixer.backend.django import mixer
+
 # from blog.models import Post, User  # noqa
 
 # yazdan = User.objects.create(username="yazdan")
@@ -70,7 +72,7 @@ django.setup()
 
 # ------------- S4 --------------
 
-from product.models import Comment
+from product.models import Comment, Product, OrderedProduct
 
 # Comment.objects.create(author="fardin", comment="python is good")
 # Comment.objects.create(author="zahra", comment="java !!!")
@@ -89,3 +91,46 @@ from product.models import Comment
 # print(Comment.objects.inactivates())
 # print(Comment.objects.exclude())
 # print(Comment.objects.get(id=2))
+
+# print(OrderedProduct.objects.all())
+
+from product.models import Image, Slide, Slider
+
+# main_slider = Slider.objects.create(name="main slider")
+# mixer.cycle(9).blend(Slider)
+
+# image_one = Image.objects.create(
+#     url="https://google.com",
+#     name="Googooli",
+#     width=1024,
+#     height=768
+# )
+#
+# slide_one = Slide.objects.create(
+#     image=image_one,
+#     link="https://links.com",
+#     title="My Image :)",
+#     description="bikhial !",
+#     slider=main_slider
+# )
+
+# print(*Slide._meta.get_fields(), sep="\n")
+
+# slider = Slider.objects.get(id=2)
+# new_slide = Slide.objects.create(
+#     url="https://googooli.go",
+#     name="image name",
+#     width=1024,
+#     height=768,
+#     link="/product/35",
+#     title="Please subscribe me !",
+#     description="this is desc",
+#     slider=slider
+# )
+
+# from random import randint
+#
+# for slider in Slider.objects.all():
+#     mixer.cycle(randint(1, 20)).blend(Slide, slider=slider)
+
+# Slider.objects.get(id=10).delete()
