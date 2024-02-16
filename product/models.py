@@ -32,7 +32,7 @@ class Comment(TimeStampMixin, ActivateMixin):
 class Product(TimeStampMixin, ActivateMixin):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    price = models.FloatField()
+    price = models.PositiveSmallIntegerField()
 
 
 class OrderedProduct(Product):

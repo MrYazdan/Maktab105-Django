@@ -4,7 +4,6 @@ from django.utils import timezone
 from tinymce.models import HTMLField
 
 
-
 # def id_creator():
 #     return uuid4().clock_seq
 #
