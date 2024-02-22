@@ -1,8 +1,8 @@
 from blog.models import Post
 from blog.forms import PostForm
-from django.views import View
-from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views import View, generic
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
 
 
@@ -27,38 +27,82 @@ from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
 # cbv -> class based view
 class BaseView(View):
     base_context = {
-        'navbar_items': [
-            {'title': 'Home', 'url': reverse_lazy('landing:home'), 'classes': ""},
-            {'title': 'Posts', 'url': reverse_lazy('landing:posts'), 'classes': ""},
-        ]
+        # 'navbar_items': [
+        #     {'title': 'Home', 'url': reverse_lazy('landing:home'), 'classes': ""},
+        #     {'title': 'Posts', 'url': reverse_lazy('landing:posts'), 'classes': ""},
+        # ]
     }
 
 
-class Home(BaseView):
-    def get(self, request):
-        return render(self.request, "home.html", {'title': 'Home', **self.base_context})
-    #
-    # def post(self, request):
-    #     return JsonResponse({'status': 200, 'msg': "Post daryaf shod !"})
+# class HomeView(BaseView):
+#     def get(self, request):
+#         return render(self.request, "home.html", {**self.base_context})
+#
+#     def post(self, request):
+#         return JsonResponse({'status': 200, 'msg': "Post daryaf shod !"})
 
 
-class Posts(BaseView):
-    _form_class = PostForm
+# class PostView(BaseView):
+#     # ListCreateView() :)
+#     _form_class = PostForm
+#
+#     def get(self, request):
+#         return render(self.request, "posts.html", {
+#             'posts': Post.objects.all(),
+#             'form': self._form_class(),
+#             **self.base_context
+#         })
+#
+#     def post(self, request):
+#         form = self._form_class(self.request.POST)
+#
+#         if form.is_valid():
+#             form.save()
+#
+#             return HttpResponse("Created :)")
+#         return HttpResponseBadRequest('Form invalid')
 
-    def get(self, request):
-        return render(self.request, "posts.html", {
-            'posts': Post.objects.all(),
-            'title': 'Posts',
-            'form': self._form_class(),
-            **self.base_context
-        })
 
-    def post(self, request):
-        form = self._form_class(self.request.POST)
+# class PostDetail(BaseView):
+#     def get(self, request, pk):
+#         post = get_object_or_404(Post, id=pk)
+#         return render(self.request, "post.html", {'post': post, **self.base_context})
+#
+#     def delete(self, request, pk):
+#         post = get_object_or_404(Post, pk=self.kwargs['pk'])
+#         post.delete()
+#
+#         return JsonResponse({"status": 200, "redirect": reverse_lazy("landing:posts")})
 
-        if form.is_valid():
-            form.save()
 
-            return HttpResponse("Created :)")
-        else:
-            return HttpResponseBadRequest('Form invalid')
+# cbv -> generics:
+# class BaseContextMixin(generic.base.ContextMixin):
+#     base_context = {
+#         'navbar_items': [
+#             {'title': 'Home', 'url': reverse_lazy('landing:home'), 'classes': ""},
+#             {'title': 'Posts', 'url': reverse_lazy('landing:posts'), 'classes': ""},
+#         ]
+#     }
+#
+#     def get_context_data(self, **kwargs):
+#         default_context = super().get_context_data(**kwargs)
+#         return {**default_context, **self.base_context}
+
+class PostView(generic.CreateView):
+    model = Post
+    fields = ["title", "author", "content"]
+    success_url = reverse_lazy("landing:posts")
+    template_name = "posts.html"
+
+    # extra_context = {
+    #     'posts': Post.objects.all()
+    # }  # TODO: Self cache data enabled
+    def get_context_data(self, **kwargs):
+        default_context = super().get_context_data(**kwargs)
+        return {**default_context, 'posts': Post.objects.all()}
+
+
+class PostDetail(generic.DetailView, generic.DeleteView):
+    template_name = "post.html"
+    model = Post
+    success_url = reverse_lazy("landing:posts")

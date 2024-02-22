@@ -1,6 +1,6 @@
-<div class="h-[170px] rounded-lg shadow-xl bg-black/30">
+<a href="{% url 'landing:post_detail' pk=id %}" class="h-[170px] block rounded-lg shadow-xl bg-black/30">
     <strong class="text-center font-bold text-2xl block my-4 text-white pb-4 border-b-4 border-white/10">{{ title }}</strong>
     <span class="px-4 text-white/90 block text-xl">author: {{ author }} <br></span>
     <hr>
     <div class="p-4 text-white text-sm">{{ content }}</div>
-</div>
+</a>
