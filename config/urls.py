@@ -9,8 +9,14 @@ urlpatterns = [
     # landing
     path('', include('landing.urls')),
 
+    # auth
+    path('', include('account.urls')),
+
     # admin
     path('admin/', admin.site.urls),
+
+    # path("auth/", include("django.contrib.auth.urls")),
+
 
     # admin textarea editor
     path('tinymce/', include('tinymce.urls')),

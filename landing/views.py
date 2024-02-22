@@ -94,6 +94,15 @@ class PostView(generic.CreateView):
     success_url = reverse_lazy("landing:posts")
     template_name = "posts.html"
 
+    def get(self, request, *args, **kwargs):
+        # request.COOKIES['custom_cookie']
+
+        response = super().get(request, *args, **kwargs)
+
+        response.set_cookie('custom_cookie', 'value is maktab !', httponly=True)
+
+        return response
+
     # extra_context = {
     #     'posts': Post.objects.all()
     # }  # TODO: Self cache data enabled

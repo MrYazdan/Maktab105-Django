@@ -8,6 +8,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -19,8 +20,8 @@ INSTALLED_APPS = [
     "core",
     "product",
     "shop",
-    "landing"
-
+    "landing",
+    "account"
 ]
 
 MIDDLEWARE = [
@@ -105,3 +106,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SITE_NAME = "Maktab 105 - Django tutorial 🚀"
+
+LOGIN_REDIRECT_URL = "/"
+AUTH_USER_MODEL = "account.User"

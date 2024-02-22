@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+{% block title %}{{ block.super }} | Login{% endblock %}
+{% block content %}
+    <div class="w-8/12 mt-5 px-[3.5rem] grid grid-cols-1 gap-6 text-xl text-black/20% duration-700 transition-[font-weight] list-decimal">
+        <div class="h-auto rounded-lg shadow-xl bg-black/30 relative">
+            <form action="{% url 'account:login' %}" method="post">
+                {% csrf_token %}
+                {{ form|safe }}
+                <br>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+{% endblock %}
