@@ -5,20 +5,16 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-<main class="flex justify-center flex-col items-center fixed inset-0 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
-    <span class="block absolute top-5 left-5 font-bold text-2xl text-yellow-500 capitalize">{{ user.username }}</span>
-    <ul class="block absolute top-16 left-5 text-xl text-white capitalize">
-        {% for url in user_history %}
-        	<li class="block">{{ url }}</li>
-        {% endfor %}
-        
-    </ul>
-    <h1 class="text-center text-white text-6xl font-bold pb-5 animate-pulse">
+<section class="min-h-[1500px] mx-auto bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
+    <header class="text-center py-28 text-white text-6xl font-bold bg-black/10">
         {% block title %}🚀 Maktab 105 - Django tutorial{% endblock %}
-    </h1>
-    {% include "component/menu.html" %}
-    <div class="h-8 w-full"></div>
-    {% block content %}{% endblock %}
-</main>
+    </header>
+    <main class="max-w-[1920px] mx-auto w-full">
+        {% include "component/menu.html" %}
+        <section class="py-8">
+            {% block content %}{% endblock %}
+        </section>
+    </main>
+</section>
 </body>
 </html>

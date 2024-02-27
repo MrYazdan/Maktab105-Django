@@ -1,0 +1,4 @@
+Django==5
+django-jazzmin
+django-tinymce
+mixer

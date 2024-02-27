@@ -10,8 +10,13 @@ def navbar_items(request):
 
     return {
         # 'user_history': [] if not user else request.session['history'],
+        'user_links': [
+            {'title': '🔒 Logout', 'url': reverse_lazy('account:logout'), 'classes': ""},
+        ] if request.user.is_authenticated else [
+            {'title': '🔑 Register', 'url': reverse_lazy('account:register'), 'classes': ""},
+            {'title': '🔓 Login', 'url': reverse_lazy('account:login'), 'classes': ""},
+        ],
         'navbar_items': [
-            {'title': 'Home', 'url': reverse_lazy('landing:home'), 'classes': ""},
-            {'title': 'Posts', 'url': reverse_lazy('landing:posts'), 'classes': ""},
+            {'title': '🏠 Home', 'url': reverse_lazy('landing:home'), 'classes': ""},
         ]
     }

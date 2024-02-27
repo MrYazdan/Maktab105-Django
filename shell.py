@@ -8,7 +8,9 @@ django.setup()
 
 from mixer.backend.django import mixer
 
-# from blog.models import Post, User  # noqa
+from blog.models import Post, User  # noqa
+
+# mixer.cycle(10).blend(Post)
 
 # yazdan = User.objects.create(username="yazdan")
 # Post.objects.create(title="Python good", author=yazdan)
@@ -74,7 +76,7 @@ from mixer.backend.django import mixer
 
 # ------------- S4 --------------
 
-from product.models import Comment, Product, OrderedProduct
+# from product.models import Comment, Product, OrderedProduct
 
 # Comment.objects.create(author="fardin", comment="python is good")
 # Comment.objects.create(author="zahra", comment="java !!!")
@@ -139,7 +141,7 @@ from product.models import Image, Slide, Slider
 
 # ------------- S6 --------------
 
-from shop.models import Product
+# from shop.models import Product
 
 # mixer.cycle(40).blend(Product)
 
@@ -158,4 +160,6 @@ from shop.models import Product
 
 # print(Product.objects.archive().update(is_deleted=False))
 
-Product.objects.filter(id__gt=35).delete()
+# Product.objects.filter(id__gt=35).delete()
+
+print([*Post.objects.values("id", "title")])

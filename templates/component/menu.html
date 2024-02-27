@@ -1,8 +1,27 @@
 {% if navbar_items %}
-	<nav class="block px-[3.5rem] w-8/12 border-black/5 border-y-4">
-        <ul class="grid grid-cols-{{ navbar_items|length }} group">
+	<nav class="block px-[3.5rem] w-full">
+        <ul class="bg-black/30 flex rounded-b-xl gap-10 px-8 relative -top-1">
+            {% if user.is_authenticated %}
+            	<li class="text-center font-bold transform duration-500 hover:text-white hover:scale-[105%] cursor-pointer text-xl py-4 text-white/90 {{ item.classes }}">
+                    <a href="/admin">
+                        {{ user.username }}
+                    </a>
+                </li>
+            {% endif %} 
+            {% for item in user_links %}
+                <li class="text-center font-bold transform duration-500 hover:text-white hover:scale-[105%] cursor-pointer text-xl py-4 text-white/90 {{ item.classes }}">
+                    <a href="{{ item.url }}">
+                        {{ item.title }}
+                    </a>
+                </li>
+            {% endfor %}
+            <form id="searchForm" action="/search" method="post" class="absolute right-8 text-2xl pt-1">
+                <label for="search"></label>
+                <input id="search" class="bg-transparent placeholder:text-white/50 py-3 px-2 outline-none text-white" name="search" placeholder="Search in posts ..." type="text">
+                <input type="submit" value="🔎" class="absolute -left-8 top-3 mt-1 cursor-pointer">
+            </form>
             {% for item in navbar_items %}
-                <li class="text-center {% if navbar_items|last != item %}border-r-4 border-black/5{% endif %} font-bold transform duration-500 hover:text-white hover:scale-[105%] cursor-pointer text-xl py-4 text-white/90 {{ item.classes }}">
+                <li class="text-center font-bold transform duration-500 hover:text-white hover:scale-[105%] cursor-pointer text-xl py-4 text-white/90 {{ item.classes }}">
                     <a href="{{ item.url }}">
                         {{ item.title }}
                     </a>
