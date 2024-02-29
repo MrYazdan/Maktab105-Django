@@ -4,6 +4,7 @@ from django.forms import Form
 from django.contrib.auth.views import LoginView as _LoginView, RedirectURLMixin
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -37,12 +38,19 @@ class LoginView(_LoginView):
     next_page = "landing:home"
     template_name = "auth/login.html"
 
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(self.request, "Welcome 😉")
+        return result
+
 
 class LogoutView(generic.RedirectView):
     url = "/"
 
     def get(self, request, *args, **kwargs):
         logout(request)
+
+        messages.info(self.request, "Bye Bye 👋🏻")
         return super().get(self.request, *args, **kwargs)
 
 

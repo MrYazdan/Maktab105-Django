@@ -4,7 +4,14 @@
     {% include "layout/head.html" %}
     {% block extra_head %}{% endblock %}
 </head>
-<body>
+<body class="relative">
+{% if messages %}
+    <div class="max-w-[1920px] alert transition duration-500 w-full inset-x-0 fixed top-1 mx-auto">
+        {% for message in messages %}
+            <div class="py-4 px-5 text-3xl {% if 'success' in message.tags %}bg-lime-500{% elif 'error' in message.tags %}bg-red-400{% else %}bg-sky-400{% endif %} rounded-lg text-white text-center mb-2">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
 <section class="min-h-[1500px] mx-auto bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
     <header class="text-center py-28 text-white text-6xl font-bold bg-black/10">
         {% block title %}🚀 Maktab 105 - Django tutorial{% endblock %}
@@ -16,5 +23,12 @@
         </section>
     </main>
 </section>
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach((el) => {
+            el.classList.add("!opacity-0")
+        })
+    }, 8000)
+</script>
 </body>
 </html>

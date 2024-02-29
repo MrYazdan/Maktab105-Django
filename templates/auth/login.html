@@ -5,7 +5,7 @@
         <div class="h-auto rounded-lg shadow-xl bg-black/30 relative">
             <form action="{% url 'account:login' %}" method="post">
                 {% csrf_token %}
-                {{ form|safe }}
+                {{ form }}
                 <br>
                 <input type="submit" value="Login">
             </form>
